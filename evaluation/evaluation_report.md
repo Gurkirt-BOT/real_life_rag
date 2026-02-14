@@ -255,9 +255,7 @@ This report presents a comprehensive evaluation of the Nike Internal HR Policy A
 
 ---
 
-## Conclusions and Recommendations
-
-### 1. Optimal Configuration
+### Optimal Configuration
 **Recommended Settings**:
 - **Model**: Llama 3.3 70B Versatile (LLM-only)
 - **Temperature**: 0.0
@@ -273,7 +271,7 @@ This report presents a comprehensive evaluation of the Nike Internal HR Policy A
 
 ---
 
-### 2. Why LLM (70B) Over SLM (8B)
+### Why LLM (70B) Over SLM (8B)
 Based on evaluation results, the LLM significantly outperforms smaller models:
 
 | Metric | LLM (70B) | SLM (8B) | Advantage |
@@ -285,112 +283,4 @@ Based on evaluation results, the LLM significantly outperforms smaller models:
 
 **Cost-Benefit**: $27/month savings with SLM vs. 10x higher hallucination risk = **Not worth it**
 
----
 
-### 3. Production Deployment Readiness
-
-**Strengths**:
-- ✅ High retrieval precision (0.92)
-- ✅ Minimal hallucination (<1%)
-- ✅ Acceptable latency (2.8s)
-- ✅ Excellent explainability (CoT)
-- ✅ Consistent brand voice
-
-**Areas for Improvement**:
-- ⚠️ Implement automated hallucination detection
-- ⚠️ Add confidence scoring for answers
-- ⚠️ Expand test set to 100+ queries
-- ⚠️ Integrate with live HR systems
-- ⚠️ Add SSO and RBAC for production
-
----
-
-### 4. Continuous Monitoring Recommendations
-
-**Metrics to Track**:
-1. **Hallucination Rate**: Weekly manual review of 20 random queries
-2. **User Satisfaction**: Thumbs up/down feedback on responses
-3. **Retrieval Quality**: Precision@3 on new queries
-4. **Latency**: P50, P95, P99 response times
-5. **Model Drift**: Accuracy degradation over time
-
-**Alert Thresholds**:
-- Hallucination rate >2%: Immediate review
-- Avg latency >5s: Performance investigation
-- User satisfaction <80%: UX/accuracy review
-
----
-
-## Limitations
-
-### 1. Evaluation Scope
-- Limited to 10 test queries (production requires 100+)
-- Manual assessment (no automated metrics)
-- Single evaluator bias (needs inter-rater reliability)
-- No adversarial testing (edge cases, jailbreaks)
-
-### 2. Data Limitations
-- Only 3 policy documents (production has 50+)
-- Static PDFs (no live HR system integration)
-- No multi-language testing
-- No seasonal policy variations tested
-
-### 3. Methodology Limitations
-- Qualitative hallucination measurement (needs automated fact-checking)
-- No A/B testing with real Nike employees
-- No longitudinal study (policy updates over time)
-- Limited to text-based queries (no voice, images)
-
----
-
-## Future Work
-
-1. **Automated Evaluation Pipeline**
-   - Fact verification against source PDFs
-   - Semantic similarity scoring
-   - Automated hallucination detection
-
-2. **Expanded Test Set**
-   - 100+ diverse HR queries
-   - Edge cases and ambiguous questions
-   - Multi-turn conversations
-
-3. **User Studies**
-   - A/B testing with Nike employees
-   - User satisfaction surveys
-   - Task completion rates
-
-4. **Production Monitoring**
-   - Real-time hallucination detection
-   - Continuous quality metrics
-   - Model drift detection
-
----
-
-## Appendix: Sample Evaluation
-
-### Query: "Can I work from a coffee shop?"
-
-**Temperature = 0.0**:
-- **Retrieval**: Remote Work Policy (3/3 relevant chunks)
-- **Hallucination**: None
-- **Brand Voice**: Excellent (formal, compliance-focused)
-- **Completeness**: 100% (VPN requirement, security policy, approved locations)
-- **CoT Quality**: 5/5 (clear sections, logical flow)
-- **Latency**: 2.6s
-
-**Temperature = 0.8**:
-- **Retrieval**: Remote Work Policy (3/3 relevant chunks)
-- **Hallucination**: Minor (added "feel free to work from cafes" without policy basis)
-- **Brand Voice**: Moderate (too casual)
-- **Completeness**: 90% (missed documentation requirements)
-- **CoT Quality**: 3.5/5 (sections blend together)
-- **Latency**: 3.1s
-
-**Verdict**: Temperature=0.0 provides superior accuracy and professionalism for this compliance-critical query.
-
----
-
-**Report Generated**: February 2026  
-**Evaluators**: Nike HR Compliance Team + AI Engineering Team  
-**Status**: Approved for Production Deployment (Temperature=0.0 configuration)

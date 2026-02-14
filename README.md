@@ -3,6 +3,7 @@
 ## Overview
 This project is a production-style, RAG-based AI Assistant designed for Nike's internal HR use. It allows employees to ask questions about company policies (Leave, Code of Conduct, Remote Work) and receive accurate, compliant answers with **complete Chain-of-Thought reasoning** using Llama 3.3 70B.
 
+**Live working demo:** https://nike-ai-consultant.streamlit.app/
 
 ## Why We Use LLM (70B) Instead of SLM (8B)
 
@@ -220,23 +221,23 @@ We conducted a comprehensive evaluation of the Nike HR RAG Assistant using 10 re
 ### Key Findings
 
 **Temperature = 0.0 (Recommended)**:
-- ✅ Minimal hallucination (<1%) - critical for compliance
-- ✅ Excellent brand voice consistency
-- ✅ Highest response completeness (98%)
-- ✅ Best Chain-of-Thought structure (4.85/5.0)
-- ✅ Strict adherence to retrieved context
-- ✅ Acceptable latency (2.8 seconds)
+- Minimal hallucination (<1%) - critical for compliance
+- Excellent brand voice consistency
+- Highest response completeness (98%)
+- Best Chain-of-Thought structure (4.85/5.0)
+- Strict adherence to retrieved context
+- Acceptable latency (2.8 seconds)
 
 **Temperature = 0.4**:
-- ✅ Good balance of accuracy and conversational tone
-- ⚠️ Acceptable hallucination rate (2%)
-- ⚠️ Slightly less complete responses
+- Good balance of accuracy and conversational tone
+- Acceptable hallucination rate (2%)
+- Slightly less complete responses
 
 **Temperature = 0.8**:
-- ❌ Unacceptable hallucination rate (5%)
-- ❌ Loses formal corporate voice
-- ❌ Incomplete responses (90%)
-- ❌ Poor CoT structure
+- Unacceptable hallucination rate (5%)
+- Loses formal corporate voice
+- Incomplete responses (90%)
+- Poor CoT structure
 
 ### Why LLM (70B) Was Selected
 
@@ -262,14 +263,12 @@ For detailed evaluation methodology and results, see [`evaluation/evaluation_rep
 ### Setup
 ```bash
 # Clone repository
-git clone <repo-url>
-cd nike-ai-consultant
+cd nike-ai-consultant-GurkirtKaur
 
 # Install dependencies
 pip install -r requirements.txt
 
 # Configure environment
-cp .env.example .env
 # Edit .env and add your GROQ_API_KEY
 ```
 
@@ -284,11 +283,10 @@ streamlit run app.py
 
 ## Project Structure
 ```
-nike-ai-consultant/
+nike-ai-consultant-GurkirtKaur/
 ├── app.py                          # Main Streamlit application with CoT display
 ├── requirements.txt                # Python dependencies (includes pdfplumber)
-├── README.md                       # This file
-├── .env.example                    # Environment template
+├── .env                            # Environment variables
 ├── config/
 │   └── settings.py                 # Configuration settings
 ├── data/
@@ -311,8 +309,10 @@ nike-ai-consultant/
 │   ├── temperature_experiment.py   # Temperature testing
 │   ├── evaluation_report.md        # Formal evaluation with metrics
 │   └── benchmark_results.md        # Temperature analysis
-└── ppt/
-    └── presentation_outline.md     # Presentation structure
+├── faiss_index/
+│   └── index.faiss                 # FAISS vector store index
+├── .gitignore                      # Git ignore file
+└── README.md                       # This file
 ```
 
 ## Usage Examples
@@ -342,24 +342,3 @@ See [`evaluation/benchmark_results.md`](evaluation/benchmark_results.md) for:
 - Brand voice consistency evaluation
 - Deployment recommendations
 
-## Why This Approach Works
-
-1. **Maximum Transparency**: Users see exactly how the AI arrived at its answer
-2. **Error Detection**: Easier to spot when the model misinterprets context
-3. **Trust Building**: Employees understand the reasoning process
-4. **Compliance-Ready**: Complete audit trail for legal defensibility
-5. **Educational**: Helps users learn about HR policies through the reasoning process
-
-## Future Enhancements
-
-- Automated hallucination detection metrics
-- Integration with live HR systems (PTO balances, org charts)
-- Multi-language support for global workforce
-- SSO integration for production deployment
-- Feedback loop for continuous improvement
-
-## License
-Internal Nike Use Only
-
-## Contact
-For questions or issues, contact the Nike AI Team.

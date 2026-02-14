@@ -258,43 +258,6 @@ These findings reinforce the recommendation to use LLM (70B) for compliance-crit
 
 ---
 
-## Limitations
-
-### 1. Qualitative Hallucination Measurement
-- Hallucination rates based on manual review of outputs, not automated metrics
-- Production system should implement:
-  - Fact verification against source documents
-  - Confidence scoring and uncertainty quantification
-  - Semantic similarity checks between generated text and retrieved context
-
-### 2. Limited Test Dataset
-- Evaluation conducted on 6 representative queries
-- Real-world deployment requires testing on hundreds of diverse queries
-- Edge cases, ambiguous queries, and adversarial inputs not comprehensively tested
-
-### 3. Temperature-Only Focus
-- Did not extensively test other parameters (top_p, top_k, frequency_penalty)
-- Temperature=0.0 with top_p=0.9 is recommended baseline
-- Further tuning may optimize for specific query types
-
-### 4. Real-World Deployment Considerations
-
-**Security & Authentication**:
-- Current implementation uses mock login
-- Production requires SSO, RBAC, audit logging, encryption
-
-**Monitoring & Observability**:
-- Continuous monitoring for response quality degradation
-- Model drift detection as policies change
-- User satisfaction metrics (thumbs up/down, follow-up queries)
-
-**Compliance & Governance**:
-- Legal review of AI-generated HR guidance
-- Disclaimers that responses are informational, not legal advice
-- Human escalation paths for complex or sensitive queries
-
----
-
 ## Conclusion
 
 For Nike's HR Policy Assistant, **Temperature=0.0** is the clear choice. It provides:
