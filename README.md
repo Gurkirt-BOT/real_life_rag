@@ -283,7 +283,7 @@ streamlit run app.py
 
 ## Project Structure
 ```
-nike-ai-consultant-GurkirtKaur/
+real_life_rag/
 ├── app.py                          # Main Streamlit application with CoT display
 ├── requirements.txt                # Python dependencies (includes pdfplumber)
 ├── .env                            # Environment variables
