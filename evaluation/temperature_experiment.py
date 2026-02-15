@@ -10,7 +10,7 @@ from rag.chunking import split_documents
 from rag.embeddings import get_embedding_model
 from rag.vector_store import load_vector_store, create_vector_store
 from rag.retriever import get_retriever
-from rag.generator import generate_answer
+from rag.generator_llm import generate_answer_llm as generate_answer
 from config.settings import FAISS_INDEX_PATH
 
 def run_experiment():
@@ -35,37 +35,19 @@ def run_experiment():
     # Test Query
     query = "Can I work from a coffee shop?"
 
-    # Case A Config
-    config_a = {"temperature": 0.0, "top_p": 0.9}
-    
-    # Case B Config
-    config_b = {"temperature": 0.8, "top_p": 0.95}
+    # Experiment Matrix
+    temperatures = [0.0, 0.4, 0.8]
+    top_ps = [0.5, 0.9, 1.0]
 
-    print(f"Test Query: '{query}'\n")
-
-    # -------------------------------------------------------
-    # Run Case A
-    # -------------------------------------------------------
-    print(f"--- CASE A: Temp={config_a['temperature']}, Top_P={config_a['top_p']} ---")
-    try:
-        res_a = generate_answer(query, retriever, config_a['temperature'], config_a['top_p'])
-        print("\n[Generated Response]:")
-        print(res_a['result'])
-    except Exception as e:
-        print(f"Error in Case A: {e}")
-
-    print("\n" + "="*50 + "\n")
-
-    # -------------------------------------------------------
-    # Run Case B
-    # -------------------------------------------------------
-    print(f"--- CASE B: Temp={config_b['temperature']}, Top_P={config_b['top_p']} ---")
-    try:
-        res_b = generate_answer(query, retriever, config_b['temperature'], config_b['top_p'])
-        print("\n[Generated Response]:")
-        print(res_b['result'])
-    except Exception as e:
-        print(f"Error in Case B: {e}")
+    for temp in temperatures:
+        for tp in top_ps:
+            print(f"--- RUNNING: Temp={temp}, Top_P={tp} ---")
+            try:
+                res = generate_answer(query, retriever, temp, tp)
+                print(f"[Response Preview]: {res['result'][:100]}...")
+            except Exception as e:
+                print(f"Error for Temp={temp}, Top_P={tp}: {e}")
+            print("-" * 30)
 
     print("\n=========================================================")
     print("Experiment Complete. Check output for analysis.")
